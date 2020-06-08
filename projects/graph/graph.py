@@ -8,6 +8,7 @@ class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
         self.vertices = {}
+        self.visited = set()
 
     def add_vertex(self, vertex_id):
         """
@@ -75,8 +76,12 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
-
+        if starting_vertex not in self.visited:
+            print(starting_vertex)
+            self.visited.add(starting_vertex)
+            for next_vert in self.get_neighbors(starting_vertex):
+                self.dft_recursive(next_vert)
+        
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
@@ -154,8 +159,8 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    graph.dft(1)
-    # graph.dft_recursive(1)
+    # graph.dft(1)
+    graph.dft_recursive(1)
 
     '''
     Valid BFS path:
