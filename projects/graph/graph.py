@@ -88,8 +88,47 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
-
+        # q = Queue()
+        # q.enqueue([starting_vertex])
+        # visited = set()
+        # while q.size() > 0:
+        #     path = q.dequeue()
+        #     v = path[-1]
+        #     if v not in visited:
+        #         visited.add(v)
+        #         if v == destination_vertex:
+        #             return path
+        #         else:
+        #             for vert in self.get_neighbors(v):
+        #                 new_path = list(path)
+        #                 new_path.append(vert)
+        #                 q.enqueue(new_path)
+        # Create an empty queue and enqueue A PATH TO the starting vertex ID
+        q = Queue()
+		# Create a Set to store visited vertices
+        q.enqueue([starting_vertex])
+        visited = set()
+		# While the queue is not empty...
+        while q.size() > 0:
+			# Dequeue the first PATH
+            path = q.dequeue()
+			# Grab the last vertex from the PATH
+            last_vertex = path[-1]
+			# If that vertex has not been visited...
+            if last_vertex not in visited:
+				# CHECK IF IT'S THE TARGET
+                visited.add(last_vertex)
+                if last_vertex == destination_vertex:
+                    return path
+                else:
+				# Then add A PATH TO its neighbors to the back of the queue
+                    for next_vert in self.get_neighbors(last_vertex):
+                        new_path = list(path)
+                        new_path.append(next_vert)
+                        q.enqueue(new_path)
+				  # COPY THE PATH
+				  # APPEND THE NEIGHOR TO THE BACK
+    
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
@@ -160,13 +199,13 @@ if __name__ == '__main__':
         1, 2, 4, 6, 3, 5, 7
     '''
     # graph.dft(1)
-    graph.dft_recursive(1)
+    # graph.dft_recursive(1)
 
     '''
     Valid BFS path:
         [1, 2, 4, 6]
     '''
-    # print(graph.bfs(1, 6))
+    print(graph.bfs(1, 6))
 
     '''
     Valid DFS paths:
