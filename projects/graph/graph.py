@@ -88,21 +88,6 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        # q = Queue()
-        # q.enqueue([starting_vertex])
-        # visited = set()
-        # while q.size() > 0:
-        #     path = q.dequeue()
-        #     v = path[-1]
-        #     if v not in visited:
-        #         visited.add(v)
-        #         if v == destination_vertex:
-        #             return path
-        #         else:
-        #             for vert in self.get_neighbors(v):
-        #                 new_path = list(path)
-        #                 new_path.append(vert)
-        #                 q.enqueue(new_path)
         # Create an empty queue and enqueue A PATH TO the starting vertex ID
         q = Queue()
 		# Create a Set to store visited vertices
