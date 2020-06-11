@@ -1,4 +1,17 @@
 import random
+class Queue():
+    def __init__(self):
+        self.queue = []
+    def enqueue(self, value):
+        self.queue.append(value)
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+    def size(self):
+        return len(self.queue)
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -72,7 +85,28 @@ class SocialGraph:
         The key is the friend's ID and the value is the path.
         """
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
+        #bft shortest path
+        q = Queue()
+        q.enqueue([user_id])
+        #run while the queue is greater than 0
+        while q.size() > 0:
+            #remove the first path from the q
+            path = q.dequeue()
+            #remove the last element from the path
+            new_user = path[-1]
+            #check if the id is has not been visited yet
+            if new_user not in visited:
+                #mark the new id as visited and insert the path as the value
+                visited[new_user] = path
+                #this is get neighbors from previous projects
+                for i in self.friendships[new_user]:
+                    #check if the node has not been visited
+                    #if the node has not been visited make a copy of the path for the new path it'll take
+                    #append the next friend to the to the new path and then insert the new path to the queue
+                    if i not in visited:
+                        new_path = list(path)
+                        new_path.append(i)
+                        q.enqueue(new_path)
         return visited
 
 
